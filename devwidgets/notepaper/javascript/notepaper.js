@@ -1,15 +1,7 @@
-/**
- * notepaper模块
- * 1.适当添加注释
- * 2.commit
- */
 var sakai = sakai || {};
 
 sakai.notepaper = function(tuid, showSettinds) {
-    var notepaper = "#notepaper";
-    var notepaperTemplate = notepaper + "_template";
-    var notepaperArea = notepaper + "_area";
-    var $editArea = $(notepaperArea);
+    var $editArea = $("#edit_area");
     
     var loadData = function() {
         $.ajax({
@@ -32,6 +24,9 @@ sakai.notepaper = function(tuid, showSettinds) {
         });
     };
     
+    ///////////////////
+    // Save the note //
+    ///////////////////
     var saveData = function(message) {
         $.ajax({
             url:"/system/notepaper",
@@ -50,32 +45,34 @@ sakai.notepaper = function(tuid, showSettinds) {
         });
     };
     
+    ////////////////////////////
+    // Autoresize the textarea //
+    ////////////////////////////
     var autoresize = function(){
         
         var settings = {
-                            animate : true,
-                            animateDuration : 150,
                             extraSpace : 16,
                             limit: 1000
                         };
         var lastScrollTop = null;
         var origHeight = $editArea.height();
-        var clone = $editArea.clone().insertBefore(notepaperArea);
+        //clone the textarea for getting the scrollTop
+        var clone = $editArea.clone().insertBefore("#edit_area");
         
         var updateSize = function() {
             clone.height(0).val($editArea.val()).scrollTop(1000);
             var scrollTop = Math.max(clone.scrollTop(), origHeight) + settings.extraSpace;
             if (lastScrollTop === scrollTop) { return; }
             lastScrollTop = scrollTop;
+            //show scrolls when get to the limit
             if ( scrollTop >= settings.limit ) {
                 $(this).css('overflow-y','');
                 return;
             }
-            settings.animate && $editArea.css('display') === 'block' ?
-                $editArea.stop().animate({height:scrollTop}, settings.animateDuration)
-                : $editArea.height(scrollTop);
+            //resize the height
+            $editArea.height(scrollTop);
         };
-        
+        updateSize();
         $editArea.live("keyup", updateSize);
         
     };
@@ -87,7 +84,7 @@ sakai.notepaper = function(tuid, showSettinds) {
         $editArea.live("focus", function() {
             $(this).css({"background-color":"#454a4f","color":"white","border":"1px solid #d5d5d5"});
         });
-         
+        
         $editArea.live("blur", function() {
             $(this).css({"background-color":"#F0F0F0","color":"black","border":"0px"});
         });
