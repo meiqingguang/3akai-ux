@@ -70,6 +70,15 @@ sakai.createnews = function(tuid, showSettings){
      */
     sakai.createnews.initialise = function(){
         $(createnewsContainer).jqmShow();
+            
+        tinyMCE.init({
+            mode : "textareas",
+            theme : "advanced",
+            height : "300",
+            widht : "200"
+        });
+
+        $(".mceEditor").show();
     };
     
     var showProcess = function(show){
@@ -95,8 +104,10 @@ sakai.createnews = function(tuid, showSettings){
     var myClose = function(hash) {
         hash.o.remove();
         hash.w.hide();
+        
         showSuccess(false);
         showProcess(false);
+        $(".mceEditor").remove();
     };
 
     var setNull = function(){
@@ -151,13 +162,15 @@ sakai.createnews = function(tuid, showSettings){
      */
     $(createnewsAddSaveNew).live("click", function(ev){
         var newTitle = $(createnewsAddTitle).val();
-        var newContent = $(createnewsAddContent).val();
+        // var newContent = $(createnewsAddContent).val();
+        var newContent = tinyMCE.get('createnews_add_content').getContent();
         var pictureURI = "";
         showProcess(true);
         saveNewNews(newTitle,newContent,pictureURI);
         setNull();
     });
-
+    
+    
     /////////////////////////////
     // Initialisation function //
     /////////////////////////////
@@ -165,6 +178,7 @@ sakai.createnews = function(tuid, showSettings){
     var doInit = function(){
         setNull();
     };
+        
     doInit();
 };
 

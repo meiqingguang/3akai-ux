@@ -67,22 +67,22 @@ sakai.news = function(){
     // Gets a specific news from the JCR and display
     var loadNewsByID = function(newsid) {
         $.ajax({
-//          url: "/devwidgets/news/pages/data/onenews.json",
+            //url: "/devwidgets/news/pages/data/onenews.json",
             url: "/system/news",
             type: "GET",
             data:{
-              "action":"get",
-              "id":newsid,
+                "action":"get",
+                "id":newsid,
             },
             success: function(data) {
-              var news = data.news;
-              if(data.success === true){
-                $(newsDetailContent).html($.TemplateRenderer(newsDetailContentTemplate, news));
-                $(newsDetailContent).show();
-              } 
+                var news = data.news;
+                if(data.success === true){
+                    $(newsDetailContent).html($.TemplateRenderer(newsDetailContentTemplate, news));
+                    $(newsDetailContent).show();
+                }
             },
             error: function(xhr, textStatus, thrownError) {
-              alert("error");
+                alert("error");
             }
         });
     };
@@ -90,19 +90,19 @@ sakai.news = function(){
     // Gets all the news from the JCR.
     var loadNewsList = function() {
         $.ajax({
-//            url: "/devwidgets/news/pages/data/sakainews.json",
+            //url: "/devwidgets/news/pages/data/sakainews.json",
             url: "/system/news",
             type: "GET",
             data:{
               "action":"allList"
             },
             success: function(data) {
-              if(data.success === true){
-                if (data.newsList) {
-                    initPager(data.newsList);
-                    allNews = data.newsList;
+                if(data.success === true){
+                    if (data.newsList) {
+                        initPager(data.newsList);
+                        allNews = data.newsList;
+                    }
                 }
-              }
             },
             error: function(xhr, textStatus, thrownError) {
                 showGeneralMessage($(inboxGeneralMessagesErrorGeneral).text());
@@ -123,9 +123,9 @@ sakai.news = function(){
             success: function(data){
                 if(data.success == true)
                 {
-                  var news = data.news;
-                  $(createNewsAddTitle).val(news.title);
-                  $(createNewsAddContent).val(news.content);
+                    var news = data.news;
+                    $(createNewsAddTitle).val(news.title);
+                    $(createNewsAddContent).val(news.content);
                 }
             },
             error: function(data){
@@ -149,7 +149,8 @@ sakai.news = function(){
               if(data.success === true)
                 {
                   showSuccess(true);
-                  window.location.reload();
+                  // window.location.reload();
+                  loadNewsList();
                 }
             },
             error: function(data){
@@ -172,8 +173,10 @@ sakai.news = function(){
             success: function(data) {
               if(data.success === true)
                 {
-                  alert("ok");
-                  window.location.reload();
+                  // alert("ok");
+                  // window.location.reload();
+                  
+                  loadNewsList();
                 }
             },
             error: function(xhr, textStatus, thrownError) {
@@ -230,7 +233,8 @@ sakai.news = function(){
         // Load the creategroup widget.
         // sakai.createnews.initialise();
 
-      $(createNewsContainer).jqmShow();
+      sakai.createnews.initialise();
+      // $(createNewsContainer).jqmShow();
       $(createNewsTipNew).hide();
       $(createNewsTipEdit).show(); 
       showProcess(false);
@@ -254,8 +258,8 @@ sakai.news = function(){
     $(createNewsLink).live("click", function(ev){
         // $("#creategroupcontainer").show();
         // Load the creategroup widget.
-        // sakai.createnews.initialise();
-        $(createNewsContainer).jqmShow();
+        sakai.createnews.initialise();
+        // $(createNewsContainer).jqmShow();
         $(createNewsTipEdit).hide();
         $(createnewsAddSaveEdit).hide();
         $(createNewsTipNew).show(); 
@@ -281,10 +285,11 @@ sakai.news = function(){
     
     // Delete a news
     $(newsOperationIconDelete).live("click", function(){
-        $(this).parent().parent().remove();
         var title = $(this).parent().siblings("#news_title_td").children()[0].text;
         var id = getIDByTitle(title);
         deleteNews(id);
+        $(this).parent().parent().remove();
+        // loadNewsList();
     });
     
     //////////////////////////////////////////////
@@ -336,6 +341,8 @@ sakai.news = function(){
         }
     };
     init();
+    
+    
 };
 
 

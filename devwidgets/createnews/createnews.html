@@ -16,11 +16,14 @@
         <div id="createnews_add_container">
             <p id="createnews_tip_new" style="display:none">__MSG__NOW_YOU_ARE_CREATING_A_SIMPLE_NEW__</p>
             <p id="createnews_tip_edit" style="display:none">__MSG__NOW_YOU_ARE_EDITTING_A_SIMPLE_NEW__</p>
-            <label for="createnews_add_title">__MSG__NEWS_TITLE__</label>
-            <input id="createnews_add_title" maxlength="255" type="text" value="" ></input>
-
-            <label for="createnews_add_content" class="content_fields">__MSG__NEWS_CONTENT__</label>
-            <textarea id="createnews_add_content" rows="4" cols="20" class="content_fields"></textarea>
+            <div class="createnews_title">
+                <label for="createnews_add_title">__MSG__NEWS_TITLE__</label>
+                <input id="createnews_add_title" maxlength="255" type="text" value="" ></input>
+            </div>
+            <div class="createnews_content">
+                <label for="createnews_add_content" class="content_fields">__MSG__NEWS_CONTENT__</label>
+                <textarea id="createnews_add_content" rows="4" cols="20" class="content_fields"></textarea>
+            </div>
 
             <div class="dialog_buttons">
                 <span id="createnews_add_process" style="display:none">__MSG__PROCESSING__ ...</span>
@@ -39,4 +42,4 @@
 </div>
 
 <!-- JAVASCRIPT -->
-<script type="text/javascript" src="/devwidgets/createnews/javascript/createnews.js"></script>
+<script type="text/javascript" src="/devwidgets/createnews/javascript/createnews.js" charset="utf-8"></script>

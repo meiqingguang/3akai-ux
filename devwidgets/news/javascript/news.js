@@ -61,8 +61,8 @@ sakai.news = function(tuid, showSettings){
     $createnewsLink.live("click", function(ev){
         // $("#creategroupcontainer").show();
         // Load the creategroup widget.
-        // sakai.createnews.initialise();
-        $createnewsContainer.jqmShow();
+        sakai.createnews.initialise();
+        // $createnewsContainer.jqmShow();
         $createNewsTipEdit.hide();
         $createNewsTipNew.show(); 
         $createnewsAddSaveEdit.hide(); 
