@@ -22,8 +22,15 @@
             </div>
             <div class="createnews_content">
                 <label for="createnews_add_content" class="content_fields">__MSG__NEWS_CONTENT__</label>
-                <textarea id="createnews_add_content" rows="4" cols="20" class="content_fields"></textarea>
+                <textarea id="mce_1" rows="4" cols="20" class="content_fields"></textarea>
             </div>
+            <form id="upload_pic" onsubmit="return AIM.submit(this, {'onStart' : startCallback, 'onComplete' : completeCallback})" method="post" enctype="multipart/form-data">
+                <div>
+                    Upload image
+                    <button type="submit" class="s3d-button s3d-button-primary" id="upload"><span class="s3d-button-inner">Upload</span></button>
+                    <input id="file" type="file" name="file" size="19" />
+                </div>
+            </form>
 
             <div class="dialog_buttons">
                 <span id="createnews_add_process" style="display:none">__MSG__PROCESSING__ ...</span>
