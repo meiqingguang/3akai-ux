@@ -25,16 +25,22 @@
                 <textarea id="mce_1" rows="4" cols="20" class="content_fields"></textarea>
             </div>
             <form id="upload_pic" onsubmit="return AIM.submit(this, {'onStart' : startCallback, 'onComplete' : completeCallback})" method="post" enctype="multipart/form-data">
-                <div>
-                    Upload image
-                    <button type="submit" class="s3d-button s3d-button-primary" id="upload"><span class="s3d-button-inner">Upload</span></button>
-                    <input id="file" type="file" name="file" size="19" />
+                <div class="createnews_uploadbar">
+                    <div class="test">
+                        <span class="createnews_uploadlabel">Upload image</span>
+                        <button type="submit" class="s3d-button s3d-button-primary" id="upload"><span class="s3d-button-inner">Upload</span></button>
+                        <input id="file" type="file" name="file" size="19" />
+                    </div>
                 </div>
             </form>
 
             <div class="dialog_buttons">
                 <span id="createnews_add_process" style="display:none">__MSG__PROCESSING__ ...</span>
                 <span id="createnews_add_success" style="display:none">__MSG__SUCCESS__</span>
+                <span id="createnews_title_empty" style="display:none">标题不能为空</span>
+                <span id="createnews_content_empty" style="display:none">内容不能为空</span>
+                <span id="createnews_pic_empty" style="display:none">请选择一张图片</span>
+                <span id="createnews_pic_format" style="display:none">上传文件格式不对，请上传gif/jpg/png格式的图片</span>
                 <button type="button" style="display:none" class="s3d-button s3d-button-primary" id="createnews_add_save_new"><span class="s3d-button-inner">__MSG__CREATE_NEWS_ADD_SAVE__</span></button>              
                 <button type="button" style="display:none" class="s3d-button s3d-button-primary" id="createnews_add_save_edit"><span class="s3d-button-inner">__MSG__CREATE_NEWS_ADD_SAVE__</span></button>
                 <button type="button" style="display:none" class="s3d-button s3d-button jqmClose" id="createnews_add_save_cancel"><span class="s3d-button-inner">__MSG__CREATE_NEWS_ADD_CANCEL__</span></button>

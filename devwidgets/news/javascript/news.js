@@ -31,10 +31,10 @@ sakai.news = function(tuid, showSettings){
     var newsTitleShowLimite = function(){
       $(".news_title").each(function () {
           if ($(this).text().length > maxTextNumber) {
-            $(this).text($(this).text().substring(0, maxTextNumber));
-            $(this).text($(this).text() + "...");
-            }
-          });
+              $(this).text($(this).text().substring(0, maxTextNumber));
+              $(this).text($(this).text() + "...");
+          }
+      });
     }
     
     var loadData = function(){

@@ -63,7 +63,17 @@ sakai.createnews = function(tuid, showSettings){
     // Utility functions //
     ///////////////////////
     
+    var hideAllTips = function(){
+        $("#createnews_add_process").hide();
+        $("#createnews_add_success").hide();
+        $("#createnews_title_empty").hide();
+        $("#createnews_content_empty").hide();
+        $("#createnews_pic_empty").hide();
+        $("#createnews_pic_format").hide();
+    };
+    
     var showProcess = function(show){
+        hideAllTips();
         if(show){
             $(createnewsAddSaveNew).hide();
             $(createnewsAddSaveCancel).hide();
@@ -76,16 +86,25 @@ sakai.createnews = function(tuid, showSettings){
     };
     
     var showSuccess = function(show){
+        hideAllTips();
         if(show){
             $(createnewsAddSuccess).show();
         } else {
             $(createnewsAddSuccess).hide();
         }
     };
+    
+    var showAlert = function(id){
+        hideAllTips();
+        $("#createnews_" + id).show();
+        setTimeout(function() {
+            $("#createnews_" + id).hide();
+        }, 5000);
+    };
 
     var setNull = function(){
-      $(createnewsAddContent).val("");
-      $(createnewsAddTitle).val("");
+        $(createnewsAddTitle).val("");
+        // tinyMCE.getInstanceById(sakai.news.getEditorID()).getBody().innerHTML = "";
     };
 
     ///////////////////
@@ -130,11 +149,9 @@ sakai.createnews = function(tuid, showSettings){
             mode : "textareas",
             theme : "advanced",
             height : "300",
-            widht : "200"
+            width : "460"
         });
-        // tinyMCE.getInstanceById("mce_1").getBody().innerHTML = "aaaaaaaa";
-
-        // tinyMCE.getInstanceById("createnews_add_content").getBody().innerHTML = "haah";
+        $("#createnews_add_title").val("");
     };
     
     var myClose = function(hash) {
@@ -168,12 +185,17 @@ sakai.createnews = function(tuid, showSettings){
      */
     $(createnewsAddSaveNew).live("click", function(ev){
         var newTitle = $(createnewsAddTitle).val();
-        // var newContent = $(createnewsAddContent).val();
         var newContent = tinyMCE.activeEditor.getContent();
         var pictureURI = "";
-        showProcess(true);
-        saveNewNews(newTitle,newContent,pictureURI);
-        setNull();
+        if(newTitle === ""){
+            showAlert("title_empty");
+        }else if(newContent === ""){
+            showAlert("content_empty");
+        }else{
+            showProcess(true);
+            saveNewNews(newTitle,newContent,pictureURI);
+            setNull();
+        }
     });
     
     
@@ -183,13 +205,25 @@ sakai.createnews = function(tuid, showSettings){
     var uploadInit = function(){
         $(function(){
             $("#upload_pic").ajaxForm({
+                beforeSubmit: function(data){
+                    if(!$("#file").val()) {
+                        showAlert("pic_empty");
+                        return false;
+                    }else{
+                        var split = $("#file").val().split(".");
+                        var fileFormat = split[split.length - 1];
+                        if(!(fileFormat === "gif" || fileFormat === "png" || fileFormat === "jpg" || fileFormat === "jpeg")){
+                            showAlert("pic_format");
+                            return false;
+                        }
+                    }
+                },
                 success: function(data){
                     var $responseData = $.parseJSON(data.replace("<pre>", "").replace("</pre>", ""));
                     for (var i in $responseData) {
                         if ($responseData.hasOwnProperty(i)) {
                             var insertImg = "<img src=/p/" + $responseData[i] + ">";
                             tinyMCE.getInstanceById(sakai.news.getEditorID()).getBody().innerHTML += insertImg;
-                            // $("#src").append(insertImg);
                         }
                     }
                 },
@@ -207,7 +241,6 @@ sakai.createnews = function(tuid, showSettings){
                     });
                 } else {
                     // no input, show error
-                    alert("No file selected!");
                     return false;
                 }
             });

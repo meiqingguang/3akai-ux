@@ -283,7 +283,6 @@ sakai.news = function(){
         var id = getIDByTitle(title);
         getEditNews(id);
         getEditNews(id);
-        // setTimeout("getEditNews('"+id+"')",3000);
         
         $(createnewsAddSaveEdit).live("click", function(ev){
             var Title = $(createNewsAddTitle).val();
@@ -309,9 +308,6 @@ sakai.news = function(){
         $(createNewsTipNew).show(); 
         $(createnewsAddSaveNew).show(); 
         $(createnewsAddSaveCancel).show(); 
-        
-        $(createNewsAddTitle).val("");
-        $(createNewsAddContent).val("");
         
     });
     
