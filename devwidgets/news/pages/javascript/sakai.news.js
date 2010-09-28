@@ -23,8 +23,8 @@ sakai.news = function(){
     var newsDetailContentTemplate = newsDetailContent + "_template";
     
     var newsOperation = newsClass + "_operation";
-    var newsOperationIconEdit = newsOperation + "_icon_edit";//newsOperationIconEdit
-    var newsOperationIconDelete = newsOperation + "_icon_delete";//newsOperationIconDelete
+    var newsOperationIconEdit = newsOperation + "_icon_edit";
+    var newsOperationIconDelete = newsOperation + "_icon_delete";
     
     var createNews =  "#createnews";
     var createNewsLink = createNews + "_link";
