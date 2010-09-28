@@ -108,7 +108,7 @@ sakai.createnews = function(tuid, showSettings){
     };
 
     ///////////////////
-    // Create a news//
+    // Create a news //
     ///////////////////
     var saveNewNews = function(title,content,pictureURI){
         $.ajax({

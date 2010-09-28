@@ -46,41 +46,6 @@ sakai.news = function(){
     ///////////////////////////
     // Load and display news //
     ///////////////////////////
-    var showProcess = function(show, type){
-        if(show){
-            $(createnewsAddSaveEdit).hide();
-            $(createnewsAddSaveNew).hide();
-            $(createnewsAddSaveCancel).hide();
-            $(createnewsAddProcess).show();
-        } else {
-            $(createnewsAddProcess).hide();
-            if(type === "new"){
-                $(createnewsAddSaveCancel).show();
-                $(createnewsAddSaveNew).show();
-            }else if(type === "edit"){
-                $(createnewsAddSaveCancel).show();
-                $(createnewsAddSaveEdit).show();
-            }
-        }
-    };
-    
-    var showSuccess = function(show, type){
-        if(show){
-            $(createnewsAddSaveEdit).hide();
-            $(createnewsAddSaveNew).hide();
-            $(createnewsAddSaveCancel).hide();
-            $(createnewsAddSuccess).show();
-        } else {
-            $(createnewsAddSuccess).hide();
-            if(type === "new"){
-                $(createnewsAddSaveCancel).show();
-                $(createnewsAddSaveNew).show();
-            }else if(type === "edit"){
-                $(createnewsAddSaveCancel).show();
-                $(createnewsAddSaveEdit).show();
-            }
-        }
-    };
     
     // Gets a specific news from the JCR and display
     var loadNewsByID = function(newsid) {
@@ -209,6 +174,46 @@ sakai.news = function(){
         });
     };
     
+    ///////////////////////
+    // Utility functions //
+    ///////////////////////
+
+    var showProcess = function(show, type){
+        if(show){
+            $(createnewsAddSaveEdit).hide();
+            $(createnewsAddSaveNew).hide();
+            $(createnewsAddSaveCancel).hide();
+            $(createnewsAddProcess).show();
+        } else {
+            $(createnewsAddProcess).hide();
+            if(type === "new"){
+                $(createnewsAddSaveCancel).show();
+                $(createnewsAddSaveNew).show();
+            }else if(type === "edit"){
+                $(createnewsAddSaveCancel).show();
+                $(createnewsAddSaveEdit).show();
+            }
+        }
+    };
+    
+    var showSuccess = function(show, type){
+        if(show){
+            $(createnewsAddSaveEdit).hide();
+            $(createnewsAddSaveNew).hide();
+            $(createnewsAddSaveCancel).hide();
+            $(createnewsAddSuccess).show();
+        } else {
+            $(createnewsAddSuccess).hide();
+            if(type === "new"){
+                $(createnewsAddSaveCancel).show();
+                $(createnewsAddSaveNew).show();
+            }else if(type === "edit"){
+                $(createnewsAddSaveCancel).show();
+                $(createnewsAddSaveEdit).show();
+            }
+        }
+    };
+    
     // Switch to the list or a specific news
     var showContainer = function(type) {
         if(type === "undefined"){return;}
@@ -219,21 +224,6 @@ sakai.news = function(){
         }else if(type === "detail"){
             $(newsDetailContainer).show();
             $(newsListContainer).hide();
-        }
-    };
-    
-    // Show the buttons
-    var showButtonsAndTips = function(type) {
-        if(type === "new"){
-            $(createNewsTipEdit).hide();
-            $(createNewsTipNew).show();
-            $(createnewsAddSaveEdit).hide();
-            $(createnewsAddSaveNew).show();
-        }else if(type === "edit"){
-            $(createNewsTipEdit).show();
-            $(createNewsTipNew).hide();
-            $(createnewsAddSaveEdit).show();
-            $(createnewsAddSaveNew).hide();
         }
     };
     
@@ -283,6 +273,7 @@ sakai.news = function(){
         var id = getIDByTitle(title);
         getEditNews(id);
         getEditNews(id);
+        // setTimeout("getEditNews('"+id+"')",3000);
         
         $(createnewsAddSaveEdit).live("click", function(ev){
             var Title = $(createNewsAddTitle).val();
@@ -308,6 +299,9 @@ sakai.news = function(){
         $(createNewsTipNew).show(); 
         $(createnewsAddSaveNew).show(); 
         $(createnewsAddSaveCancel).show(); 
+        
+        $(createNewsAddTitle).val("");
+        $(createNewsAddContent).val("");
         
     });
     
@@ -381,7 +375,6 @@ sakai.news = function(){
         }
     };
     init();
-    
     
 };
 

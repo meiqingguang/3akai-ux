@@ -59,7 +59,6 @@ sakai.news = function(tuid, showSettings){
     };
     
     $createnewsLink.live("click", function(ev){
-        // $("#creategroupcontainer").show();
         // Load the creategroup widget.
         sakai.createnews.initialise();
         // $createnewsContainer.jqmShow();
@@ -72,7 +71,7 @@ sakai.news = function(tuid, showSettings){
     });
     
     var init = function(){
-      loadData();    
+        loadData();    
     };
      
     init();
