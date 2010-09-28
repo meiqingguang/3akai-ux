@@ -62,17 +62,18 @@ sakai.createnews = function(tuid, showSettings){
     ///////////////////////
     // Utility functions //
     ///////////////////////
-
-    /**
-     * Public function that can be called from elsewhere
-     * (e.g. chat and sites widget)
-     * It initializes the createnews widget and shows the jqmodal (ligthbox)
-     */
-    sakai.createnews.initialise = function(){
-        $(createnewsContainer).jqmShow();
+    
+    var hideAllTips = function(){
+        $("#createnews_add_process").hide();
+        $("#createnews_add_success").hide();
+        $("#createnews_title_empty").hide();
+        $("#createnews_content_empty").hide();
+        $("#createnews_pic_empty").hide();
+        $("#createnews_pic_format").hide();
     };
     
     var showProcess = function(show){
+        hideAllTips();
         if(show){
             $(createnewsAddSaveNew).hide();
             $(createnewsAddSaveCancel).hide();
@@ -85,6 +86,7 @@ sakai.createnews = function(tuid, showSettings){
     };
     
     var showSuccess = function(show){
+        hideAllTips();
         if(show){
             $(createnewsAddSuccess).show();
         } else {
@@ -92,17 +94,18 @@ sakai.createnews = function(tuid, showSettings){
         }
     };
     
-    var myClose = function(hash) {
-        hash.o.remove();
-        hash.w.hide();
-        showSuccess(false);
-        showProcess(false);
+    var showAlert = function(id){
+        hideAllTips();
+        $("#createnews_" + id).show();
+        setTimeout(function() {
+            $("#createnews_" + id).hide();
+        }, 5000);
     };
 
     var setNull = function(){
-      $(createnewsAddContent).val("");
-      $(createnewsAddTitle).val("");
-    }
+        $(createnewsAddTitle).val("");
+        // tinyMCE.getInstanceById(sakai.news.getEditorID()).getBody().innerHTML = "";
+    };
 
     ///////////////////
     // Create a news//
@@ -129,9 +132,36 @@ sakai.createnews = function(tuid, showSettings){
         });
     };
     
-    ////////////////////
-    // Event Handlers //
-    ////////////////////
+    /////////////
+    // jqModal //
+    /////////////
+    
+    /**
+     * Public function that can be called from elsewhere
+     * (e.g. chat and sites widget)
+     * It initializes the createnews widget and shows the jqmodal (ligthbox)
+     */
+    sakai.createnews.initialise = function(){
+        $(createnewsContainer).jqmShow();
+        $(".content_fields").show();
+        tinyMCE.init({
+            mode : "textareas",
+            theme : "advanced",
+            height : "300",
+            width : "460"
+        });
+        $("#createnews_add_title").val("");
+    };
+    
+    var myClose = function(hash) {
+        showSuccess(false);
+        showProcess(false);
+        
+        $(".mceEditor").remove();
+        
+        hash.o.remove();
+        hash.w.hide();
+    };
 
     /*
      * Add jqModal functionality to the container.
@@ -144,27 +174,142 @@ sakai.createnews = function(tuid, showSettings){
         toTop: true,
         onHide: myClose
     });
+    
+    ////////////////////
+    // Event Handlers //
+    ////////////////////
 
     /*
      * Add binding to the save button (create the group when you click on it)
      */
     $(createnewsAddSaveNew).live("click", function(ev){
         var newTitle = $(createnewsAddTitle).val();
-        var newContent = $(createnewsAddContent).val();
+        var newContent = tinyMCE.activeEditor.getContent();
         var pictureURI = "";
-        showProcess(true);
-        saveNewNews(newTitle,newContent,pictureURI);
-        setNull();
+        if(newTitle === ""){
+            showAlert("title_empty");
+        }else if(newContent === ""){
+            showAlert("content_empty");
+        }else{
+            showProcess(true);
+            saveNewNews(newTitle,newContent,pictureURI);
+            setNull();
+        }
     });
-
+    
+    
     /////////////////////////////
     // Initialisation function //
     /////////////////////////////
+    var uploadInit = function(){
+        $(function(){
+            $("#upload_pic").ajaxForm({
+                beforeSubmit: function(data){
+                    if(!$("#file").val()) {
+                        showAlert("pic_empty");
+                        return false;
+                    }else{
+                        var split = $("#file").val().split(".");
+                        var fileFormat = split[split.length - 1];
+                        if(!(fileFormat === "gif" || fileFormat === "png" || fileFormat === "jpg" || fileFormat === "jpeg")){
+                            showAlert("pic_format");
+                            return false;
+                        }
+                    }
+                },
+                success: function(data){
+                    var $responseData = $.parseJSON(data.replace("<pre>", "").replace("</pre>", ""));
+                    for (var i in $responseData) {
+                        if ($responseData.hasOwnProperty(i)) {
+                            var insertImg = "<img src=/p/" + $responseData[i] + ">";
+                            tinyMCE.getInstanceById(sakai.news.getEditorID()).getBody().innerHTML += insertImg;
+                        }
+                    }
+                },
+                error : function(){
+                    alert("Upload error!");
+                }
+            });
+            
+            $("#upload_pic").submit(function () {
+                // validate args
+                if($("#file").val()) {
+                    return AIM.submit(this, {
+                        'onStart' : startCallback,
+                        'onComplete' : completeCallback
+                    });
+                } else {
+                    // no input, show error
+                    return false;
+                }
+            });
+            
+            var startCallback = function() {
+                return true;
+            };
+            
+            var completeCallback = function(response) {
+            };
+            
+            var AIM = {
+            
+                frame : function(c) {
+                    var n = 'f' + Math.floor(Math.random() * 99999);
+                    var d = document.createElement('DIV');
+                    d.innerHTML = '<iframe style="display:none" src="about:blank" id="'+n+'" name="'+n+'" onload="AIM.loaded(\''+n+'\')"></iframe>';
+                    document.body.appendChild(d);
+            
+                    var i = document.getElementById(n);
+                    if (c && typeof(c.onComplete) === 'function') {
+                        i.onComplete = c.onComplete;
+                    }
+                    return n;
+                },
+            
+                form : function(f, name) {
+                    f.setAttribute('target', name);
+                },
+            
+                submit : function(f, c) {
+                    AIM.form(f, AIM.frame(c));
+                    if (c && typeof(c.onStart) === 'function') {
+                        return c.onStart();
+                    } else {
+                        return true;
+                    }
+                },
+            
+                loaded : function(id) {
+                    var i = document.getElementById(id);
+                    var d = null;
+                    if (i.contentDocument) {
+                        d = i.contentDocument;
+                    } else if (i.contentWindow) {
+                        d = i.contentWindow.document;
+                    } else {
+                        d = window.frames[id].document;
+                    }
+                    if (d.location.href === "about:blank") {
+                        return;
+                    }
+            
+                    if (typeof(i.onComplete) === 'function') {
+                        i.onComplete(d.body.innerHTML);
+                    }
+                }
+            };
+            
+            $("#upload_pic").attr("action", "/system/pool/createfile");
+        });
+    };
 
     var doInit = function(){
         setNull();
+        uploadInit();
     };
+        
     doInit();
 };
+
 
 sakai.api.Widgets.widgetLoader.informOnLoad("createnews");

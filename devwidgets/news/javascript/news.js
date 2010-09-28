@@ -41,10 +41,10 @@ sakai.news = function(tuid, showSettings){
     var newsTitleShowLimite = function(){
       $newTitle.each(function () {
           if ($(this).text().length > maxTextNumber) {
-            $(this).text($(this).text().substring(0, maxTextNumber));
-            $(this).text($(this).text() + "...");
-            }
-          });
+              $(this).text($(this).text().substring(0, maxTextNumber));
+              $(this).text($(this).text() + "...");
+          }
+      });
     }
     
     var loadData = function(){
@@ -75,21 +75,19 @@ sakai.news = function(tuid, showSettings){
     };
     
     $createnewsLink.live("click", function(ev){
-        // $("#creategroupcontainer").show();
         // Load the creategroup widget.
-        // sakai.createnews.initialise();
-        $createnewsContainer.jqmShow();
+        sakai.createnews.initialise();
+        // $createnewsContainer.jqmShow();
         $createNewsTipEdit.hide();
         $createNewsTipNew.show(); 
         $createnewsAddSaveEdit.hide(); 
         $createnewsAddSaveNew.show(); 
         $createnewsAddSaveCancel.show(); 
-        
     });
     
     var init = function(){
       userRightJudgement();
-      loadData();    
+      loadData(); 
     };
      
     init();
