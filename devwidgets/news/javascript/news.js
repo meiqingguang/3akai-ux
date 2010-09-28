@@ -15,6 +15,8 @@ sakai.news = function(tuid, showSettings){
     var $newsList = $("#news_list");
     var $newTitle = $(".news_title");
     var $newsListError = $("#news_list_error");
+    var $newsListEmpty = $("#news_list_empty");
+    var $newsListError = $("#news_list_error");
     var $newsListTemplate = $("#news_list_template");
     var $createnewsAddSaveEdit = $("#createnews_add_save_edit");
     var $createnewsAddSaveNew = $("#createnews_add_save_new"); 
@@ -23,13 +25,21 @@ sakai.news = function(tuid, showSettings){
     var $createnewsContainer = $("#createnews_container");
     var $createNewsTipNew = $("#createnews_tip_new");
     var $createNewsTipEdit = $("#createnews_tip_edit");
-    
-    
+    var $haveRightToShow = $(".have_right_to_show");
+
     var maxTextNumber = 27;
+    
+    //judge user's right
+    var userRightJudgement = function(){
+      var me = sakai.data.me;
+      if(sakai.api.Security.saneHTML(sakai.api.User.getProfileBasicElementValue(me.profile, "firstName")) === "Admin"){
+        $(".have_right_to_show").show();
+      }
+    }
     
     // limite the text number of each title of news
     var newsTitleShowLimite = function(){
-      $(".news_title").each(function () {
+      $newTitle.each(function () {
           if ($(this).text().length > maxTextNumber) {
             $(this).text($(this).text().substring(0, maxTextNumber));
             $(this).text($(this).text() + "...");
@@ -46,10 +56,16 @@ sakai.news = function(tuid, showSettings){
             },
             type: "GET",
             success: function(data){
-              if(data.success === true){
-                $newsList.html($.TemplateRenderer($newsListTemplate, data));
-                $newsList.show();
-                newsTitleShowLimite();
+              if(data.success){
+                if(data.newsList.length === 0){
+                  $newsListEmpty.show();
+                }else{
+                  $newsList.html($.TemplateRenderer($newsListTemplate, data));
+                  $newsList.show();
+                  newsTitleShowLimite();
+                }
+              }else{
+                $newsListError.show();
               }
             },
             error: function(){
@@ -72,6 +88,7 @@ sakai.news = function(tuid, showSettings){
     });
     
     var init = function(){
+      userRightJudgement();
       loadData();    
     };
      

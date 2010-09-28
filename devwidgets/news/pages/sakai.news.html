@@ -72,11 +72,20 @@
 
         <!-- NAVIGATION -->
         <div id="widget_topnavigation" class="widget_inline"></div>
+        
+        
 
         <!-- HEADER -->
         <div class="fl-container-flex header">
             <div class="fl-fix fl-centered fixed-container">
                 <div class="decor"></div>
+                
+                <!-- CONTAINER FOR THE CREATENEWS CONTAINER -->
+                <div id="createnewscontainer" style="display:none;">
+                    <!-- We need this container to show the pop-up where you can add a news -->
+                    <div id="widget_createnews" class="widget_inline">
+                    </div>
+                </div>
 
                 <!-- TITLE BAR  -->
                 <div class="s3d-site-heading">
@@ -102,127 +111,51 @@
                             <div class="top_decor">
                                 <div class="news-heading news_news_header" id="news_news">新闻</div>
                             </div>
-
-                            <!-- NEWS -->
-                            <!--
                             <div class="main_content_container">
-
-                                <table class="news-table" id="news_table" summary="All your messages.">
-                                    <tr class="different">
-                                        <th width="15%" class="news_news_table_header_sort" id="news_table_header_from"><span>作者</span></th>
-                                        <th width="50%" class="news_news_table_header_sort" id="news_table_header_subject"><span>标题</span></th>
-                                        <th width="20%" class="news_news_table_header_sort" id="news_table_header_date"><span>时间</span></th>
-                                        <th width="15%" class="news_news_table_header_sort" id="news_table_header_date"><span>操作</span></th>
-                                    </tr>
-                                </table>
-                            </div>
-                             
-                            <div class="bottom_decor">
-                              <div class="fl-force-right sender-options">
-                                <a href="javascript:;" id="news_operation_add">发布新闻</a>
-                              </div>
-                            </div>
-                            -->
-                            <div class="main_content_container"> 
-                                <!-- Pager div -->
-                                <div id="news_pager">
-                                    <form action="#">
-                                        
-                                        <!-- Pager table -->
-                                        <table class="news-table" id="students-page">
-                                            <thead>
-                                                <tr class="different">
-                                                  <!--
-                                                    <th width="15%">作者</th>
-                                                  -->
-                                                  <th width="15%">作者</th>
-                                                  <th width="55%">标题</th>
-                                                  <th width="20%">时间</th>
-                                                  <th width="10%">操作</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="body-template">
-                                                <tr rsf:id="row:" class="news_tr">
-                                                    <td>
-                                                        <a class="news_news_message_from" href="/dev/show.html" rsf:id="author"></a>
-                                                    </td>
-                                                    <td id="news_title_td">
-                                                        <a href="javascript:;" class="news_title" rsf:id="title"></a>
-                                                    </td>
-                                                    <td rsf:id="createTime"></td>
-                                                    <td class="news_operation">
-                                                      <a style="display:none;" class="news_operation_icon_edit" href="javascript:;"></a>
-                                                      <a style="display:none;" class="news_operation_icon_delete" href="javascript:;"></a>
-                                                    </td>
-                                                </tr>
-                                                <tr rsf:id="scr=ignore">
-                                                    <td colspan="4">没有任何新闻</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        
-                                        <!-- Pager Bar -->
-                                        <ul id="pager-bottom" class="fl-pager-bottom flc-pager-bottom">
-                                            <li class="fl-pager-previous flc-pager-previous"><a href="#">&lt; previous</a></li>
-                                            <li>
-                                                <ul class="pager-links flc-pager-links">
-                                                    <li value="1" class="fl-pager-pageLink flc-pager-pageLink"><a href="#">1</a></li>
-                                                    <li class="flc-pager-pageLink-disabled">2</li>
-                                                    <li value="2" class="fl-pager-pageLink flc-pager-pageLink"><a href="#">3</a></li>
-                                                    <li value="3" class="fl-pager-pageLink flc-pager-pageLink"><a href="#">3</a></li>
-                                                    <li value="4" class="fl-pager-pageLink flc-pager-pageLink"><a href="#">4</a></li>
-                                                    <li value="5" class="fl-pager-pageLink flc-pager-pageLink"><a href="#">5</a></li>
-                                                    <li value="6" class="fl-pager-pageLink flc-pager-pageLink"><a href="#">6</a></li>
-                                                    <li value="7" class="fl-pager-pageLink flc-pager-pageLink"><a href="#">7 (last)</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="fl-pager-next flc-pager-next"><a href="#">next &gt;</a></li>
-                                            <li>
-                                                Show <span> <select class="flc-pager-page-size">
-                                                <option value="5">5</option>
-                                                <option value="10">10</option>
-                                                <option value="20">20</option>
-                                                <option value="50">50</option>
-                                                </select></span> per page
-                                            </li>
-                                        </ul>
-                                        
-                                  </form>
-                                </div>
                             </div>    
                             <div class="bottom_decor">
                               <div class="fl-force-right sender-options">
-                                <a href="javascript:;" id="createnews_link">发布新闻</a>
+                                <a href="javascript:;" id="createnews_link" class="have_right_to_show" style="display:none;">发布新闻</a>
                               </div>
                             </div>
 
 
                             <div id="news_news_sort_up" style="display:none;"><img src="_images/arrow_up_inbox.png" alt="__MSG__UP__" class="news_arrow" /></div>
                             <div id="news_news_sort_down" style="display:none;"><img src="_images/arrow_down_inbox.png" alt="__MSG__DOWN__" class="news_arrow" /></div>
-
-
+                          
                             <div id="news_news_template" title=""><!--
-                            {for m in news}
-                                <tr class="news_tr" id="">
-                                    <td>
-                                        <a class="news_news_message_from" href="/dev/show.html">${m.author}</a></td>
-                                    </td>
-                                    <td id="news_table_subject_${m.id}">
-                                        <a href="javascript:;" class="news_title" id="${m.id}">${m.title}</a>
-                                    </td>
-                                    <td>${m.created}</td>
-                                    <td class="news_operation">
-                                      <a style="display:none;" class="news_operation_icon_edit" href="javascript:;"></a>
-                                      <a style="display:none;" class="news_operation_icon_delete" href="javascript:;"></a>
-                                    </td>
-                                </tr>
-                            {forelse}
-                                <tr class="news_tr">
-                                    <td colspan="3" class="news_message_none">__MSG__NO_MESSAGES_FOUND__.</td>
-                                </tr>
-                            {/for}
-                            --></div>
-
+                             <table class="news-table" id="students-page">
+                                <thead>
+                                    <tr class="different">
+                                      <th width="15%">作者</th>
+                                      <th width="55%">标题</th>
+                                      <th width="20%">时间</th>
+                                      <th width="10%" class="have_right_to_show" style="display:none;">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="body-template">
+                                  {for m in newsList}
+                                      <tr class="news_tr">
+                                          <td>
+                                              <a class="news_news_message_from" href="/dev/show.html">${m.author}</a></td>
+                                          </td>
+                                          <td id="news_title_td">
+                                              <a href="javascript:;" class="news_title" id="${m.id}">${m.title}</a>
+                                          </td>
+                                          <td>${m.createTime}</td>
+                                          <td class="news_operation have_right_to_show" style="display:none;">
+                                            <a style="display:none;" class="news_operation_icon_edit" href="javascript:;"></a>
+                                            <a style="display:none;" class="news_operation_icon_delete" href="javascript:;"></a>
+                                          </td>
+                                      </tr>
+                                   {forelse}
+                                      <tr class="news_tr" id="news_message">
+                                          <td colspan="3" class="news_message_none">__MSG__NO_MESSAGES_FOUND__.</td>
+                                      </tr>
+                                  {/for}
+                                 </tbody>
+                            </table> -->
+                            </div>
 
                             <div id="news_table_preloader"><!--
                                 <tr class="news_tr">
@@ -240,19 +173,15 @@
 
                         <!-- Header -->
                         <div class="top_toolbar fl-fix">
-                            <div class="fl-force-left sender-options">
-                                <a href="javascript:;" id="news_detail_backto_news_list"><span>&laquo;</span>返回</a>
-                            </div>
-                            <div class="fl-force-right sender-options">
-                                <a href="javascript:;" id="inbox_message_option_delete">删除</a>
-                            </div>
+                            
                         </div>
 
                         <div class="top_decor">
                             <div class="news-heading">新闻</div>
                         </div>
 
-                        <div id="news_detail_content" class="main_content_container" style="display:none"></div>
+                        <div id="news_detail_content" class="main_content_container" style="display:none">
+                        </div>
                         <div id="news_detail_content_template"><!--
                             <div class="sender_details">
                                 <div class="sender_picture_container">
@@ -272,6 +201,15 @@
                         --></div>
                         
                         <div class="bottom_decor">
+                          <div class="fl-force-left sender-options">
+                              <a href="javascript:;" id="news_detail_backto_news_list"><span>&laquo;</span>返回</a>
+                          </div>
+                          <div class="fl-force-right sender-options">
+                              <a href="javascript:;" id="inbox_message_option_delete" class="have_right_to_show" style="display:none;">删除</a>
+                          </div>
+                          <div class="fl-force-right sender-options">
+                             <a href="javascript:;" id="inbox_message_option_edit" class="have_right_to_show" style="display:none;">编辑</a>
+                          </div>
                         </div>
                     </div>
 
@@ -306,12 +244,7 @@
             </div>
         </div>
         
-        <!-- CONTAINER FOR THE CREATENEWS CONTAINER -->
-        <div id="createnewscontainer" style="">
-            <!-- We need this container to show the pop-up where you can add a news -->
-            <div id="widget_createnews" class="widget_inline">
-            </div>
-        </div>
+        
         
         <!-- FOOTER WIDGET -->
         <div id="widget_footer" class="widget_inline footercontainer"></div>

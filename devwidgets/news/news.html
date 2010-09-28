@@ -6,6 +6,7 @@
     <div class="fl-widget-content">
         <div id="news_list" style="display:none"></div>
         <div id="news_list_error" style="display:none">__MSG__ERROR__</div>
+        <div id="news_list_empty" style="display:none">__MSG__EMPTY__</div>
     </div>
     <!-- Template -->
     <div id="news_list_template"><!--
@@ -21,14 +22,17 @@
     <div class="fl-widget-options fl-fix">
         <div class="widget-options-inner">
             <ul>
-                <li>
+                <li class="have_right_to_show"  style="display:none;">
                     <a id="create_news_link" href="javascript:;">__MSG__ADD_A_NEWS__</a>
                 </li>
-                <li>
+                <li class="have_right_to_show" style="display:none;">
                     <span class="pipe_divider">|</span>
                 </li>
                 <li>
                     <a href="/devwidgets/news/pages/sakai.news.html">__MSG__MORE__</a>
+                </li>
+                <li>
+                    <div id="usernameContainer"></div>
                 </li>
             </ul>
         </div>

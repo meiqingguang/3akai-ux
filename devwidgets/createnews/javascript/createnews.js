@@ -106,7 +106,7 @@ sakai.createnews = function(tuid, showSettings){
 
     ///////////////////
     // Create a news//
-    ///////////////////
+    //////////////////
     var saveNewNews = function(title,content,pictureURI){
         $.ajax({
             url: "/system/news",
@@ -121,7 +121,6 @@ sakai.createnews = function(tuid, showSettings){
                 showProcess(false);
                 if(data.success === true){
                    showSuccess(true);
-                   window.location.reload();
                 }
             },
             error: function(data){

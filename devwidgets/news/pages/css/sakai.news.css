@@ -337,18 +337,6 @@
 
 #news_detail #news_detail_body
 { margin: 10px 0 0 0;line-height:20px; }
-/*
-#news_detail .message-header
-{ font-weight: bold; font-size: 15px; padding-bottom: 5px; }
 
-.inbox_detail .message-options
-{ padding: 15px 15px 0 0; }
-
-.inbox_detail .message-options a
-{ color:#058ec4; font-weight: bold; }
-
-.news_detail_body
-{ margin: 15px 15px 0 0; }
-*/
 /** ---------------------**/
 /* TABLE COLUMN WIDTHS */
