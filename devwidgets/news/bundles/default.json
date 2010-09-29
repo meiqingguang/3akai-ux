@@ -1,0 +1,9 @@
+{
+    "name": "News",
+    "description": "News",
+    "MORE": "More",
+    "ADD_A_NEWS":"Add a news",
+    "ERROR":"Data Error!", 
+    "EMPTY":"There is no news available for you.", 
+    "AUTHOR": "author",
+}
