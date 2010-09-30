@@ -110,27 +110,6 @@ sakai.createnews = function(tuid, showSettings){
     ///////////////////
     // Create a news//
     //////////////////
-    var saveNewNews = function(title,content,pictureURI){
-        $.ajax({
-            url: "/system/news",
-            data: {
-                "action":"add",
-                "title":title,
-                "content":content,
-                "pictureURI":pictureURI,
-            },
-            type: "POST",
-            success: function(data){
-                showProcess(false);
-                if(data.success === true){
-                   showSuccess(true);
-                }
-            },
-            error: function(data){
-                alert("error");
-            },
-        });
-    };
     
     /////////////
     // jqModal //
@@ -182,20 +161,6 @@ sakai.createnews = function(tuid, showSettings){
     /*
      * Add binding to the save button (create the group when you click on it)
      */
-    $(createnewsAddSaveNew).live("click", function(ev){
-        var newTitle = $(createnewsAddTitle).val();
-        var newContent = tinyMCE.activeEditor.getContent();
-        var pictureURI = "";
-        if(newTitle === ""){
-            showAlert("title_empty");
-        }else if(newContent === ""){
-            showAlert("content_empty");
-        }else{
-            showProcess(true);
-            saveNewNews(newTitle,newContent,pictureURI);
-            setNull();
-        }
-    });
     
     
     /////////////////////////////
