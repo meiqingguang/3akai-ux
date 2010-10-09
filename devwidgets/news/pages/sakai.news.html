@@ -132,7 +132,7 @@
                                     <tr class="different">
                                       <th width="15%">__MSG__NEWS_LIST_AUTHOR__</th>
                                       <th width="55%">__MSG__NEWS_LIST_TITLE__</th>
-                                      <th width="20%">__MSG_NEWS_LIST_DATE___</th>
+                                      <th width="20%">__MSG__NEWS_LIST_DATE__</th>
                                       <th width="10%" class="have_right_to_show" style="display:none;">  </th>
                                     </tr>
                                 </thead>
@@ -200,6 +200,7 @@
                             <div id="news_detail">
                                 <div class="news-header" id="news_detail_title">${title}</div>
                                 <div id="news_detail_body">${content}</div>
+                                <div id="news_id" style="display:none;">${id}</div>
                             </div>
                         --></div>
                         
@@ -208,10 +209,10 @@
                               <a href="javascript:;" id="news_detail_backto_news_list"><span>&laquo;</span>返回</a>
                           </div>
                           <div class="fl-force-right sender-options">
-                              <a href="javascript:;" id="inbox_message_option_delete" class="have_right_to_show" style="display:none;">删除</a>
+                              <a href="javascript:;" id="news_detail_option_delete" class="have_right_to_show" style="display:none;">删除</a>
                           </div>
                           <div class="fl-force-right sender-options">
-                             <a href="javascript:;" id="inbox_message_option_edit" class="have_right_to_show" style="display:none;">编辑</a>
+                             <a href="javascript:;" id="news_detail_option_edit" class="have_right_to_show" style="display:none;">编辑</a>
                           </div>
                         </div>
                     </div>
