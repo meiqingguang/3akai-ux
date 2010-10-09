@@ -377,9 +377,9 @@ sakai.news = function(){
     
     //edit a news
     $(newsOperationIconEdit).live("click", function(ev){
-        sakai.createnews.initialise();
+        // sakai.createnews.initialise();
         mceNum++;
-        // $(createNewsContainer).jqmShow();
+        $(createNewsContainer).jqmShow();
         $(createNewsTipEdit).show();
         $(createnewsAddSaveEdit).show();
         $(createNewsTipNew).hide();
@@ -404,9 +404,9 @@ sakai.news = function(){
     });
     
     $(newsDetailOptionEdit).live("click", function(ev){
-        sakai.createnews.initialise();
+        // sakai.createnews.initialise();
         mceNum++;
-        // $(createNewsContainer).jqmShow();
+        $(createNewsContainer).jqmShow();
         $(createNewsTipEdit).show();
         $(createnewsAddSaveEdit).show();
         $(createNewsTipNew).hide();
@@ -420,47 +420,42 @@ sakai.news = function(){
         setID(id);
         getEditNews(id);
         getEditNews(id);
-        
-        $(createnewsAddSaveEdit).live("click", function(ev){
-            var Title = $(createNewsAddTitle).val();
-            var Content = tinyMCE.getInstanceById(sakai.news.getEditorID()).getBody().innerHTML;
-            showProcess(true, "edit");
-            saveEditNews(getID(),Title,Content,"");
-            showProcess(false, "edit");
-            showSuccess(false, "edit");
-        });
+    });
+    $(createnewsAddSaveEdit).live("click", function(ev){
+        var Title = $(createNewsAddTitle).val();
+        var Content = tinyMCE.getInstanceById(sakai.news.getEditorID()).getBody().innerHTML;
+        showProcess(true, "edit");
+        saveEditNews(getID(),Title,Content,"");
+        showProcess(false, "edit");
+        showSuccess(false, "edit");
     });
     
     //add a news
     $(createNewsLink).live("click", function(ev){
-        sakai.createnews.initialise();
+        // sakai.createnews.initialise();
         mceNum++;
-        $("#"+sakai.news.getEditorID()+"_parent").focus();
-        // $(createNewsContainer).jqmShow();
+        $(createNewsContainer).jqmShow();
         $(createNewsTipEdit).hide();
         $(createnewsAddSaveEdit).hide();
         $(createNewsTipNew).show(); 
         $(createnewsAddSaveNew).show(); 
         $(createnewsAddSaveCancel).show(); 
-        
         $(createNewsAddTitle).val("");
-        
-        $(createnewsAddSaveNew).live("click", function(ev){
-            var newTitle = $(createNewsAddTitle).val();
-            var newContent = tinyMCE.getInstanceById(sakai.news.getEditorID()).getBody().innerHTML;
-            alert(newContent);
-            // var newContent = tinyMCE.activeEditor.getContent();
-            var pictureURI = "";
-            if(newTitle === ""){
-                showAlert("title_empty");
-            }else if(newContent === ""){
-                showAlert("content_empty");
-            }else{
-                showProcess(true);
-                saveNewNews(newTitle,newContent,pictureURI);
-            }
-        });
-        
+    });
+    
+    $(createnewsAddSaveNew).live("click", function(ev){
+        var newTitle = $(createNewsAddTitle).val();
+        var newContent = tinyMCE.getInstanceById(sakai.news.getEditorID()).getBody().innerHTML;
+        var pictureURI = "";
+        if(newTitle === ""){
+            showAlert("title_empty");
+        }else if(newContent === ""){
+            showAlert("content_empty");
+        }else{
+            showProcess(true);
+            alert("dd");
+            saveNewNews(newTitle,newContent,pictureURI);
+        }
     });
     
     // Delete a news
@@ -482,15 +477,6 @@ sakai.news = function(){
     // Show news list
     $(newsDetailBacktoList).live("click", function(e){
         showContainer("list");
-    });
-    
-
-    // Delete a news
-    $(newsOperationIconDelete).live("click", function(){
-        $(this).parent().parent().remove();
-        var title = $(this).parent().siblings("#news_title_td").children()[0].text;
-        var id = $(this).parent().siblings("#news_title_td").children()[0].id;
-        deleteNews(id);
     });
     
     $(newsDetailOptionDelete).live("click", function(){

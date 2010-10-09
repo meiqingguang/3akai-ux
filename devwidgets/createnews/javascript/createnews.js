@@ -132,6 +132,19 @@ sakai.createnews = function(tuid, showSettings){
         $("#createnews_add_title").val("");
     };
     
+    var myShow = function(hash) {
+        $(".content_fields").show();
+        tinyMCE.init({
+            mode : "textareas",
+            theme : "advanced",
+            height : "300",
+            width : "460"
+        });
+        $("#createnews_add_title").val("");
+        
+        hash.w.show();
+    };
+    
     var myClose = function(hash) {
         showSuccess(false);
         showProcess(false);
@@ -151,6 +164,7 @@ sakai.createnews = function(tuid, showSettings){
         modal: true,
         overlay: 20,
         toTop: true,
+        onShow: myShow,
         onHide: myClose
     });
     
