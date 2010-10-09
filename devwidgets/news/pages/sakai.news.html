@@ -92,7 +92,7 @@
 
                 <!-- TITLE BAR  -->
                 <div class="s3d-site-heading">
-                    <h1 id="sitetitle">__MSG__SAKAINEWS__</h1>
+                    <h1 id="sitetitle">__MSG__NEWS_SAKAINEWS__</h1>
                 </div>
             </div>
         </div>
@@ -112,9 +112,9 @@
                         <form name="my-news" action="" method="post">
 
                             <div class="top_decor">
-                                <div class="news-heading news_news_header" id="news_news">新闻</div>
+                                <div class="news-heading news_news_header" id="news_news">__MSG__NEWS_NEWS__</div>
                             </div>
-                            <div class="main_content_container">
+                            <div id="main_content_container" class="main_content_container">
                             </div>    
                             <div class="bottom_decor">
                               <div class="fl-force-right sender-options">
@@ -130,17 +130,17 @@
                              <table class="news-table" id="students-page">
                                 <thead>
                                     <tr class="different">
-                                      <th width="15%">作者</th>
-                                      <th width="55%">标题</th>
-                                      <th width="20%">时间</th>
-                                      <th width="10%" class="have_right_to_show" style="display:none;">操作</th>
+                                      <th width="15%">__MSG__NEWS_LIST_AUTHOR__</th>
+                                      <th width="55%">__MSG__NEWS_LIST_TITLE__</th>
+                                      <th width="20%">__MSG_NEWS_LIST_DATE___</th>
+                                      <th width="10%" class="have_right_to_show" style="display:none;">  </th>
                                     </tr>
                                 </thead>
                                 <tbody id="body-template">
                                   {for m in newsList}
                                       <tr class="news_tr">
                                           <td>
-                                              <a class="news_news_message_from" href="/dev/show.html">${m.author}</a></td>
+                                              <span class="news_news_message_from">${m.author}</span>
                                           </td>
                                           <td id="news_title_td">
                                               <a href="javascript:;" class="news_title" id="${m.id}">${m.title}</a>
@@ -183,7 +183,7 @@
                             <div class="news-heading">新闻</div>
                         </div>
 
-                        <div id="news_detail_content" class="main_content_container" style="display:none">
+                        <div id="news_detail_content" class="main_content_container" style="display:none;">
                         </div>
                         <div id="news_detail_content_template"><!--
                             <div class="sender_details">

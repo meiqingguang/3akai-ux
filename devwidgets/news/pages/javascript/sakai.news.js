@@ -1,7 +1,6 @@
 var sakai = sakai || {};
 
 sakai.news = function(){
-    var mceNum = 0;
     var newsEditID = "";
     var allNews = [];
     var news = "news";
@@ -47,16 +46,18 @@ sakai.news = function(){
     var inboxMessageOptionDelete = "#inbox_message_option_delete";
     
     var messagesForTypeCat;
-    var messagesPerPage = 4;
+    var messagesPerPage = 4;// default 13 messages per page
+    var currentPage = 1;
+    var mceNum = 0;
     var newsall = {};
-//    var currentPage = 2;
+    
 
     
     ///////////////////////////
     // Load and display news //
     ///////////////////////////
     
-   //judge user's right 
+    //judge user's right
     var userRightJudgement = function(){
       var me = sakai.data.me;
       if(sakai.api.Security.saneHTML(sakai.api.User.getProfileBasicElementValue(me.profile, "firstName")) === "Admin"){
@@ -123,7 +124,8 @@ sakai.news = function(){
                   allNews = data.newsList;
                   newsall = data;
                   messagesForTypeCat = data.newsList.length;
-                  showPage(1);
+                  showPage(currentPage);
+                  // showPage(1);
                 }
               }
               else{
@@ -145,7 +147,7 @@ sakai.news = function(){
             data1[j].newsList[i] = newsall.newsList[i];
           if (i % messagesPerPage == messagesPerPage - 1) {j++;}
         }
-        $(".main_content_container").html($.TemplateRenderer(newsTableTemplate, data1[pageNumber-1]));
+        $("#main_content_container").html($.TemplateRenderer(newsTableTemplate, data1[pageNumber-1]));
         userRightJudgement();
         newsOperationAction();
     };
@@ -158,6 +160,7 @@ sakai.news = function(){
         pageMessages(pageNumber);
         // Show set of messages
         getAllMessages(pageNumber);
+        currentPage = pageNumber;
     };
     
     var pageMessages = function(pageNumber) {
@@ -484,38 +487,37 @@ sakai.news = function(){
             showSuccess(false, "edit");
         });
     });
-//    };
-/*    
-    $(inboxMessageOptionEdit).live("click", function(ev){
-      $(createNewsContainer).jqmShow();
-      $(createNewsTipNew).hide();
-      $(createNewsTipEdit).show(); 
-      showProcess(false);
-      
-      var title = $(newsDetailTitle).html();
-      var id = getIDByTitle(title);
-      getEditNews(id); 
-      
-      $(createnewsAddSaveEdit).live("click", function(ev){
-          var Title = $(createNewsAddTitle).val();
-          var Content = $(createNewsAddContent).val();
-          var pictureURI = "";
-          showProcess(true);
-          saveEditNews(id,Title,Content,pictureURI);
-          showSuccess(false);
-      });  
+    
+    //inbox_message_option_edit
+    $("#inbox_message_option_edit").live("click", function(ev){
+        sakai.createnews.initialise();
+        mceNum++;
+        // $(createNewsContainer).jqmShow();
+        $(createNewsTipEdit).show();
+        $(createnewsAddSaveEdit).show();
+        $(createNewsTipNew).hide();
+        $(createnewsAddSaveNew).hide();
+        $(createnewsAddSaveCancel).show(); 
+        showProcess(false, "edit");
+        
+        var title = $(this).parent().siblings("#news_title_td").children()[0].text;
+        var id = getIDByTitle(title);
+        getEditNews(id);
+        getEditNews(id);
+        
+        $(createnewsAddSaveEdit).live("click", function(ev){
+            var Title = $(createNewsAddTitle).val();
+            var Content = tinyMCE.activeEditor.getContent();
+            var pictureURI = "";
+            showProcess(true, "edit");
+            saveEditNews(id,Title,Content,pictureURI);
+            showProcess(false, "edit");
+            showSuccess(false, "edit");
+        });
     });
-*/    
+    
     //add a news
     $(createNewsLink).live("click", function(ev){
-        // $("#creategroupcontainer").show();
-        // Load the creategroup widget.
-        /*
-<<<<<<< HEAD
-        // sakai.createnews.initialise();
-        
-        $(createNewsContainer).jqmShow();
-        */
         sakai.createnews.initialise();
         mceNum++;
         // $(createNewsContainer).jqmShow();

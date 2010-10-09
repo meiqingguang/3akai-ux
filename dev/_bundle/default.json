@@ -598,5 +598,16 @@
 "YOUR_MESSAGE_HAS_BEEN_SENT": "Your message has been sent",
 "YOUR_PASSWORD_SHOULD_BE_FOUR_CHARACTERS_LONG": "Your password should be 4 characters long",
 "YOUR_PROFILE_INFORMATION_HAS_BEEN_UPDATED": "Your profile information has been updated",
-"SAKAINEWS": "Sakai News"
+
+
+"NEWS_SAKAINEWS": "Sakai News",
+"NEWS_NEWS": "News",
+"NEWS_LIST_AUTHOR": "Author",
+"NEWS_LIST_TITLE": "Title",
+"NEWS_LIST_DATE": "Date",
+"NEWS_ADD_A_NEWS": "Add a news",
+"NEWS_BACK_TO_LIST": "Back to list",
+"NEWS_EDIT": "Edit",
+"NEWS_DELETE": "Delete"
+
 }
