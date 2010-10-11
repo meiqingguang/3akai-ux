@@ -66,10 +66,10 @@ sakai.createnews = function(tuid, showSettings){
     var hideAllTips = function(){
         $("#createnews_add_process").hide();
         $("#createnews_add_success").hide();
-        $("#createnews_title_empty").hide();
-        $("#createnews_content_empty").hide();
-        $("#createnews_pic_empty").hide();
-        $("#createnews_pic_format").hide();
+        $("#title_empty").hide();
+        $("#content_empty").hide();
+        $("#pic_empty").hide();
+        $("#pic_format").hide();
     };
     
     var showProcess = function(show){
@@ -96,9 +96,9 @@ sakai.createnews = function(tuid, showSettings){
     
     var showAlert = function(id){
         hideAllTips();
-        $("#createnews_" + id).show();
+        $("#" + id).show();
         setTimeout(function() {
-            $("#createnews_" + id).hide();
+            $("#" + id).hide();
         }, 5000);
     };
 
@@ -141,6 +141,8 @@ sakai.createnews = function(tuid, showSettings){
             width : "460"
         });
         $("#createnews_add_title").val("");
+        $("#file").val("");
+        hideAllTips();
         
         hash.w.show();
     };

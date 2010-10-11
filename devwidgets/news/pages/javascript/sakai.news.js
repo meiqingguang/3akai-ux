@@ -51,6 +51,7 @@ sakai.news = function(){
     var mceNum = 0;
     var newsall = {};
     var newsID = "";
+    var editCounter = 1;
 
     
     ///////////////////////////
@@ -102,9 +103,9 @@ sakai.news = function(){
     
     var showAlert = function(id){
         hideAllTips();
-        $("#createnews_" + id).show();
+        $("#" + id).show();
         setTimeout(function() {
-            $("#createnews_" + id).hide();
+            $("#" + id).hide();
         }, 5000);
     };
     
@@ -216,11 +217,13 @@ sakai.news = function(){
                     var news = data.news;
                     $(createNewsAddTitle).val(news.title);
                     tinyMCE.getInstanceById(sakai.news.getEditorID()).getBody().innerHTML = news.content;
+                }else {
+                    alert("新闻不存在，或已被删除");
                 }
             },
             error: function(data){
                 alert("getEditNews error");
-            },
+            }
         });
     };
     
@@ -294,6 +297,13 @@ sakai.news = function(){
                     alert("ok");
                     loadnewsall();
                     showContainer("list");
+                }else {
+                    if($(newsDetailContainer).is(":visible")) {
+                        // showAlert("detail_cannt_delete");
+                    }else {
+                        // showAlert("list_cannt_delete");
+                    }
+                    alert("此新闻已被删除！");
                 }
             },
             error: function(xhr, textStatus, thrownError) {
@@ -305,7 +315,7 @@ sakai.news = function(){
     ///////////////////////
     // Utility functions //
     ///////////////////////
-
+    
     var showProcess = function(show, type){
         if(show){
             $(createnewsAddSaveEdit).hide();
@@ -390,17 +400,13 @@ sakai.news = function(){
         var title = $(this).parent().siblings("#news_title_td").children()[0].text;
         var id = $(this).parent().siblings("#news_title_td").children()[0].id;
         setID(id);
-        getEditNews(id);
-        getEditNews(id);
-        
-        $(createnewsAddSaveEdit).live("click", function(ev){
-            var Title = $(createNewsAddTitle).val();
-            var Content = tinyMCE.getInstanceById(sakai.news.getEditorID()).getBody().innerHTML;
-            showProcess(true, "edit");
-            saveEditNews(getID(),Title,Content,"");
-            showProcess(false, "edit");
-            showSuccess(false, "edit");
-        });
+        if(editCounter == 1){
+            getEditNews(id);
+            getEditNews(id);
+            editCounter = 0;
+        }else{
+            getEditNews(id);
+        }
     });
     
     $(newsDetailOptionEdit).live("click", function(ev){
@@ -414,18 +420,26 @@ sakai.news = function(){
         $(createnewsAddSaveCancel).show(); 
         showProcess(false, "edit");
         
-        
         var title = $(newsDetailTitle).html();
         var id = $("#news_id").html();
         setID(id);
-        getEditNews(id);
-        getEditNews(id);
+        if(editCounter == 1){
+            getEditNews(id);
+            getEditNews(id);
+            editCounter = 0;
+        }else{
+            getEditNews(id);
+        }
     });
+    
     $(createnewsAddSaveEdit).live("click", function(ev){
         var Title = $(createNewsAddTitle).val();
         var Content = tinyMCE.getInstanceById(sakai.news.getEditorID()).getBody().innerHTML;
         showProcess(true, "edit");
         saveEditNews(getID(),Title,Content,"");
+        if($(newsDetailContainer).is(":visible")) {
+            loadNewsByID(getID());
+        }
         showProcess(false, "edit");
         showSuccess(false, "edit");
     });
@@ -453,7 +467,6 @@ sakai.news = function(){
             showAlert("content_empty");
         }else{
             showProcess(true);
-            alert("dd");
             saveNewNews(newTitle,newContent,pictureURI);
         }
     });
