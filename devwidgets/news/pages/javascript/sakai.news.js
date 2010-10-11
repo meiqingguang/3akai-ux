@@ -436,11 +436,18 @@ sakai.news = function(){
     $(createnewsAddSaveEdit).live("click", function(ev){
         var Title = $(createNewsAddTitle).val();
         var Content = tinyMCE.getInstanceById(sakai.news.getEditorID()).getBody().innerHTML;
-        showProcess(true, "edit");
-        saveEditNews(getID(),Title,Content,"");
-        if($(newsDetailContainer).is(":visible")) {
-            loadNewsByID(getID());
+        if(Title === ""){
+            showAlert("title_empty");
+        }else if(Content === ""){
+            showAlert("content_empty");
+        }else{
+            showProcess(true, "edit");
+            saveEditNews(getID(),Title,Content,"");
+            if($(newsDetailContainer).is(":visible")) {
+                loadNewsByID(getID());
+            }
         }
+        
         showProcess(false, "edit");
         showSuccess(false, "edit");
     });

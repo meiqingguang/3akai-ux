@@ -599,7 +599,6 @@
 "YOUR_PASSWORD_SHOULD_BE_FOUR_CHARACTERS_LONG": "Your password should be 4 characters long",
 "YOUR_PROFILE_INFORMATION_HAS_BEEN_UPDATED": "Your profile information has been updated",
 
-
 "NEWS_SAKAINEWS": "Sakai News",
 "NEWS_NEWS": "News",
 "NEWS_LIST_AUTHOR": "Author",
@@ -609,5 +608,4 @@
 "NEWS_BACK_TO_LIST": "Back to list",
 "NEWS_EDIT": "Edit",
 "NEWS_DELETE": "Delete"
-
 }
