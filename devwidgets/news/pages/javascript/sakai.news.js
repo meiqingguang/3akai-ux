@@ -219,6 +219,7 @@ sakai.news = function(){
                     tinyMCE.getInstanceById(sakai.news.getEditorID()).getBody().innerHTML = news.content;
                 }else {
                     alert("新闻不存在，或已被删除");
+                    $(createNewsContainer).jqmHide();
                 }
             },
             error: function(data){
