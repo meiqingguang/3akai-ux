@@ -82,11 +82,11 @@ sakai.notepaper = function(tuid, showSettinds) {
         autoresize();
         
         $editArea.live("focus", function() {
-            $(this).css({"background-color":"#454a4f","color":"white","border":"1px solid #d5d5d5"});
+            $(this).css({"background-color":"#ffffcc","color":"black","border":"2px solid #f1ca65"});
         });
         
         $editArea.live("blur", function() {
-            $(this).css({"background-color":"#F0F0F0","color":"black","border":"0px"});
+            $(this).css({"background-color":"#ffffcc","color":"black","border":"2px solid white"});
         });
         
         $editArea.live("change", function() {
