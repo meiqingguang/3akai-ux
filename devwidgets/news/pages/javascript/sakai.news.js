@@ -125,12 +125,15 @@ sakai.news = function(){
               if(data.success){
                 if (data.newsList.length === 0) {
                   $(newsTableTR).hide();
+                  $("#news_no_news_msg").show();
                 }else{
                   allNews = data.newsList;
                   newsall = data;
                   messagesForTypeCat = data.newsList.length;
                   showPage(currentPage);
                   // showPage(1);
+                  $("#news_no_news_msg").hide();
+                  
                 }
               }
               else{

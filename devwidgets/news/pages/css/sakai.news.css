@@ -342,3 +342,9 @@
 /* TABLE COLUMN WIDTHS */
 
 .bottom_operation { padding: 10px;}
+
+.news_no_news_msg {
+    color: #999999;
+    padding-top: 180px;
+    text-align: center;
+}

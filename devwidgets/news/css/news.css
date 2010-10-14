@@ -22,3 +22,11 @@
 #news_list .news_list_alterrow {
     background-color: #f5f6f6;
 }
+
+.news_error_msg {
+    padding-left: 15px;
+    color: #999999;
+    font-size: 1em;
+    font-style: italic;
+    font-weight: normal;
+}
