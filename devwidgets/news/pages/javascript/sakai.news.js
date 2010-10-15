@@ -73,10 +73,10 @@ sakai.news = function(){
     var hideAllTips = function(){
         $("#createnews_add_process").hide();
         $("#createnews_add_success").hide();
-        $("#createnews_title_empty").hide();
-        $("#createnews_content_empty").hide();
-        $("#createnews_pic_empty").hide();
-        $("#createnews_pic_format").hide();
+        $("#title_empty").hide();
+        $("#content_empty").hide();
+        $("#pic_empty").hide();
+        $("#pic_format").hide();
     };
     
     var showProcess = function(show){
@@ -445,7 +445,7 @@ sakai.news = function(){
         var Content = tinyMCE.getInstanceById(sakai.news.getEditorID()).getBody().innerHTML;
         if(Title === ""){
             showAlert("title_empty");
-        }else if(Content === ""){
+        }else if(tinyMCE.getInstanceById(sakai.news.getEditorID()).getContent() === ""){
             showAlert("content_empty");
         }else{
             showProcess(true, "edit");
@@ -478,7 +478,7 @@ sakai.news = function(){
         var pictureURI = "";
         if(newTitle === ""){
             showAlert("title_empty");
-        }else if(newContent === ""){
+        }else if(tinyMCE.getInstanceById(sakai.news.getEditorID()).getContent() === ""){
             showAlert("content_empty");
         }else{
             showProcess(true);
