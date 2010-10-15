@@ -3,6 +3,6 @@
     "description": "News",
     "MORE": "More",
     "ERROR":"Data Error!", 
-    "EMPTY":"There is no news available for you.", 
-    "AUTHOR": "author",
+    "EMPTY":"There is no news available for you", 
+    "AUTHOR": "author"
 }

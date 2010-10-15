@@ -194,10 +194,14 @@ sakai.news = function(){
                 if(data.success === true){
                     $(newsDetailContent).html($.TemplateRenderer(newsDetailContentTemplate, news));
                     $(newsDetailContent).show();
+                    $("#no_news_error").hide();
+                }else{
+                    $("#news_detail_content").show();
+                    $("#no_news_error").show();
                 }
             },
             error: function(xhr, textStatus, thrownError) {
-                alert("loadNewsByID error");
+                alert("数据连接错误，无法读取新闻");
             }
         });
     };

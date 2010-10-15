@@ -14,13 +14,12 @@
         <link rel="stylesheet" type="text/css" href="/dev/_css/sakai/sakai.3.css" />
 
         <!-- Sakai Page CSS -->
-        <link rel="stylesheet" type="text/css" href="/dev/_css/sakai/sakai.news.css" />
         <link rel="stylesheet" type="text/css" href="/devwidgets/news/pages/css/sakai.news.css" />
 
         <!-- 3rd party CSS -->
         <link rel="stylesheet" type="text/css" href="/dev/_css/sakai/sakai.components.jq_pager.css" />
         <link rel="stylesheet" type="text/css" href="/dev/_lib/jquery/plugins/gritter/css/jquery.gritter.css" />
-        <link rel="stylesheet" type="text/css" href="/devwidgets/pickeruser/css/autoSuggest.css" />
+        <link rel="stylesheet" type="text/css" href="/dev/_css/lib/jquery.autoSuggest.css" />
 
         <!-- Fluid Pager CSS -->
         <link rel="stylesheet" type="text/css" href="/devwidgets/news/pages/css/pager.css" />
@@ -115,7 +114,7 @@
                                 <div class="news-heading news_news_header" id="news_news">__MSG__NEWS_NEWS__</div>
                             </div>
                             <div id="main_content_container" class="main_content_container">
-                                <div id="news_no_news_msg" class="news_no_news_msg" style="display:none;">__MSG__NO_MESSAGES_FOUND__</div>    
+                                <div id="news_no_news_msg" class="news_no_news_msg" style="display:none;">__MSG__NEWS_NO_NEWS_FOUND__</div>    
                             </div>
                             <div class="bottom_decor">
                               <div class="fl-force-right sender-options">
@@ -156,7 +155,7 @@
                                       </tr>
                                    {forelse}
                                       <tr class="news_tr" id="news_message">
-                                          <td colspan="3" class="news_message_none">__MSG__NO_MESSAGES_FOUND__.</td>
+                                          <td colspan="3" class="news_message_none">__MSG__NEWS_NO_NEWS_FOUND__.</td>
                                       </tr>
                                   {/for}
                                  </tbody>
@@ -187,6 +186,7 @@
                         </div>
 
                         <div id="news_detail_content" class="main_content_container" style="display:none;">
+                            <div id="no_news_error" class="news_no_news_msg" style="display:none;">__MSG__NEWS_NO_NEWS_ERROR__</div>
                         </div>
                         <div id="news_detail_content_template"><!--
                             <div class="sender_details">
